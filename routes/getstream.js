@@ -48,6 +48,7 @@ router.get(apiPath, async (req, res, next) => {
         // Fallback
         return res.status(404).json({error: {details: [{message: 'Not Found'}]}});
     } catch(error) {
+        console.log(error);
         next(error);
     }
 });
