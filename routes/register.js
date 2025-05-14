@@ -11,12 +11,12 @@ const { quickError } = require('../helpers');
 const apiPath = '/api/auth/v1/register';
 
 // Frontend
-router.get('/register', async (req, res) => {
+router.get('/register', auth.noAuth, async (req, res) => {
     res.render('register', {title: 'Register'});
 });
 
 // API
-router.post(apiPath, async(req, res, next) => {
+router.post(apiPath, auth.noAuth, async(req, res, next) => {
     const reqBody = req.body;
     const testResult = registerValidator.test(reqBody);
     if(testResult.error !== undefined)
@@ -49,7 +49,7 @@ router.post(apiPath, async(req, res, next) => {
     }
 });
 
-router.all(apiPath, (req, res, next) => {
+router.all(apiPath, auth.noAuth, (req, res, next) => {
     return next(quickError('Method Not Allowed', 405));
 });
 

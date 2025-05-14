@@ -52,9 +52,8 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// Website startup
+// Database setup
 const db = database.db;
-
 const sessionStore = new SequelizeStore({
     db: db,
     table: 'Session',
@@ -80,6 +79,7 @@ app.use(sessionData);
 // CSRF setup
 app.use(csrfSynchronisedProtection);
 
+// Website startup
 db.sync().then(() => {
     app.use((req, res, next) => {
         const notFoundError = new Error('Not Found');

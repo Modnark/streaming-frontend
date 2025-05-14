@@ -9,12 +9,12 @@ const { quickError } = require('../helpers');
 const apiPath = '/api/auth/v1/login';
 
 // Frontend
-router.get('/login', async (req, res) => {
+router.get('/login', auth.noAuth, async (req, res) => {
     res.render('login', {title: 'Login'});
 });
 
 // API
-router.post(apiPath, async (req, res) => {
+router.post(apiPath, auth.noAuth, async (req, res, next) => {
     const reqBody = req.body;
     const testResult = loginValidator.test(reqBody);
     if(testResult.error !== undefined)
@@ -22,7 +22,7 @@ router.post(apiPath, async (req, res) => {
 
     try {
         const userRes = await db.transaction(async(t) => {
-            const user = database.models.User.findOne({
+            const user = await database.models.User.findOne({
                 where: {
                     username: reqBody.username
                 },
@@ -46,7 +46,7 @@ router.post(apiPath, async (req, res) => {
     }
 });
 
-router.all(apiPath, (req, res, next) => {
+router.all(apiPath, auth.noAuth, (req, res, next) => {
     return next(quickError('Method Not Allowed', 405));
 });
 

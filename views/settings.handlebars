@@ -1,0 +1,16 @@
+<!-- I hate inline css, but I see no other good way -->
+<div class="ContentCollection" style="justify-content: center;">
+    <div class="ContentBox_sm" style="max-width: 600px;">
+        <h3 class="ContentBoxHeader">Settings</h3>
+        <div class="ContentBoxBody">
+            {{> formErrors}}
+            <label for="Form_Settings_StreamKey">Stream Key</label>
+            <input type="password" class="No_Margin_Bottom" name="StreamKey" id="Form_Settings_StreamKey" readonly value="{{streamKey}}">
+            <a href="#" class="Link_sm" id="Button_Copy">Copy</a>
+            <a href="#" class="Link_sm" id="Button_Reveal">Reveal</a>
+            <a href="#" class="Link_sm" id="Button_Regenerate">Regenerate</a>
+        </div>
+    </div>
+</div>     
+
+<script src="/js/perpage/settings.js"></script>

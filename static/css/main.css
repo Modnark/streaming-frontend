@@ -10,6 +10,15 @@ body {
     box-sizing: border-box;
 }
 
+a {
+    color: rgb(79, 79, 79);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(54, 54, 54);
+}
+
 /* Header */
 #HeaderBody {
     background-color: #6f6f6f;
@@ -164,4 +173,14 @@ button:active {
 #errorListContainer > ul {
     list-style: none;
     padding: 0;
+}
+
+/* Form Factors */
+.Link_sm {
+    font-size: 12px;
+    margin: 0;
+}
+
+.No_Margin_Bottom {
+    margin-bottom: 0;
 }

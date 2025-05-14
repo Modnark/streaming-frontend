@@ -1,7 +1,5 @@
 async function sessionData(req, res, next) {
     const loggedIn = req.session.loggedIn;
-    
-    console.log(loggedIn);
 
     if(loggedIn) {
         const userId = req.session.userId;
@@ -18,7 +16,6 @@ async function sessionData(req, res, next) {
 async function startNewSession(req, user) {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log('starting new session');
             req.session.loggedIn = true;
             req.session.userId = user.id;
             req.session.username = user.username;
