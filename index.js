@@ -40,6 +40,7 @@ const hbs = exphbs.create({
 
 // Setup assets
 app.use(express.static('static'));
+app.use('/streams', express.static(config.server.streamStorage));
 
 // Setup router
 routes(app);
