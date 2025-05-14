@@ -35,14 +35,13 @@ router.get(apiPath, async (req, res, next) => {
                 return next(quickError('Not Found', 404));
             }
 
-            console.log(filePath);
-
             // Get ready to send it
             res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
             res.setHeader('Content-Disposition', 'inline; filename="playlist.m3u8"');
 
             // Send it
-            return fs.createReadStream(filePath).pipe(res);
+            const data = await fs.readFile(filePath);
+            return res.send(data);
         }
 
         // Fallback
