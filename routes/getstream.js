@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database');
 const db = database.db;
-const { quickError } = require('../helpers');
+const { quickError, getStreamFileName } = require('../helpers');
 const path = require('path');
 const config = require('../config.json');
 const fs = require('fs/promises');
@@ -25,8 +25,8 @@ router.get(apiPath, async (req, res, next) => {
 
         // Check if user exists
         if(userRes) {
-            const streamKey = userRes.streamKey; // Get stream key from userid
-            const filePath = path.join(config.server.streamStorage, `${streamKey}_dat.m3u8`);
+            const streamName = getStreamFileName(userRes.username, userRes.userId);
+            const filePath = path.join(config.server.streamStorage, `${streamName}_dat.m3u8`);
         
             // Make sure it exists
             try {
