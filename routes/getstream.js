@@ -32,7 +32,7 @@ router.get(apiPath, async (req, res, next) => {
             try {
                 await fs.access(filePath);
             } catch(error) {
-                next(quickError('Not Found', 404));
+                return next(quickError('Not Found', 404));
             }
 
             // Get ready to send it
