@@ -7,12 +7,20 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ."
   },
   "dependencies": {
+    "argon2": "^0.43.0",
+    "connect-session-sequelize": "^7.1.7",
+    "cookie-parser": "^1.4.7",
+    "csrf-sync": "^4.2.1",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "joi": "^17.13.3",
+    "nodemon": "^3.1.10",
     "sequelize": "^6.37.7",
-    "sqlite": "^5.1.1"
+    "sqlite3": "^5.1.7"
   }
 }

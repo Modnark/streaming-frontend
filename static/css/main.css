@@ -1,0 +1,167 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url("/img/stripes.png");
+    max-width: 1200px;
+    margin: auto;
+    font-size: 14px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Header */
+#HeaderBody {
+    background-color: #6f6f6f;
+    box-shadow: inset 0px 40px 30px -10px rgba(254, 254, 254, 0.25);
+    padding: 14px 0 14px 0;
+    font-size: 0; /* Ugly hack */
+}
+
+#HeaderBody a {
+    padding: 14px;
+    color: white;
+    text-decoration: none;
+}
+
+#HeaderBody a, p, div, span, ul, li {
+    font-size: 14px; /* Ugly hack part 2 */
+}
+
+#HeaderBody a:hover {
+    background-color: rgb(206, 206, 206);
+    color: black;
+}
+
+#RightOfHeader {
+    float: right;
+}
+
+#RightOfHeader {
+    font-size: 0; /* Ugly hack */
+}
+
+#RightOfHeader a, p, div, span, ul, li {
+    font-size: 14px; /* Ugly hack part 2 */
+}
+
+/* Main Page */
+#Page {
+    margin-top: 16px;
+}
+
+/* Page Structures */
+.ContentCollection {
+    display: flex;
+}
+
+.ContentCollection > *:not(:first-child) {
+    padding-left: 16px;
+}
+
+.ContentCollection > *:not(:last-child) {
+    padding-right: 16px;
+}
+
+.ContentBox_sm {
+    flex: 1;
+}
+
+.ContentBox_md {
+    flex: 2;
+}
+
+.ContentBox_lg {
+    flex: 3;
+}
+
+.ContentBoxHeader {
+    margin: 0;
+    padding: 8px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #acacac;
+    box-shadow: inset 0px 40px 30px -10px rgba(225, 225, 225, 0.639);  
+}
+
+.ContentBoxBody {
+    padding: 16px;
+    background-color: #c3c3c3;
+    border-radius: 0px 0px 5px 5px;
+}
+
+/* OLD
+.CB_MR {
+    margin-right: 16px;
+}
+
+.CB_ML {
+    margin-left: 16px;
+}
+
+.CB_MT {
+    margin-top: 16px;
+}
+
+.CB_MB {
+    margin-bottom: 16px;
+}
+*/
+
+/* Helpers */
+.TextCenter {
+    text-align: center;
+}
+
+/* Inputs / Forms */
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    border: 1px solid #6f6f6f;
+    border-radius: 4px;
+    width: 100%;
+    height: 32px;
+    margin-bottom: 8px;
+}
+
+button {
+    border-radius: 4px;
+    border-style: none;
+    background-color: #6f6f6f;
+    box-shadow: inset 0px 40px 30px -10px rgba(225, 225, 225, 0.639);  
+}
+
+.Button_sm {
+	border-radius: 8px;
+	color: white;
+	padding: 8px;
+	min-width: 72px;
+	font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+	background-color: #242424;
+}
+
+button:active {
+	background-color: #111111;
+}
+
+/* Colors */
+.Muted {
+    color: #6f6f6f;
+}
+
+/* Errors */
+#errorListContainer {
+    color: red;
+}
+
+#errorListContainer > ul {
+    list-style: none;
+    padding: 0;
+}

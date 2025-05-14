@@ -1,13 +1,6 @@
-<div class="ContentCollection">
-{{#if loggedIn}}
-    <div class="ContentBox_md">
-        <h3 class="ContentBoxHeader">Welcome back {{username}}</h3>
-        <div class="ContentBoxBody">
-            Welcome to this streaming site thing. Idk what to write here...
-        </div>
-    </div>
-{{else}}
-    <div class="ContentBox_sm">
+<!-- I hate inline css, but I see no other good way -->
+<div class="ContentCollection" style="justify-content: center;">
+    <div class="ContentBox_sm" style="max-width: 400px;">
         <h3 class="ContentBoxHeader">Login</h3>
         <div class="ContentBoxBody">
             {{> formErrors}}
@@ -24,16 +17,6 @@
             </div>
         </div>
     </div>
+</div>     
 
-    <div class="ContentBox_md">
-        <h3 class="ContentBoxHeader">Welcome</h3>
-        <div class="ContentBoxBody">
-            Welcome to this streaming site thing. Idk what to write here...
-        </div>
-    </div>
-{{/if}}
-</div>
-
-{{#unless loggedIn}}
 <script src="/js/perpage/login.js"></script>
-{{/unless}}

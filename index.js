@@ -1,60 +1,34 @@
 const express = require('express');
 const app = express();
-const port = 9984;
+const config = require('./config.json');
 const exphbs = require ('express-handlebars');
 const database = require('./database');
 const routes = require('./router');
+const helmet = require('helmet');
+const { csrfSynchronisedProtection } = require('./csrf');
+const session = require('express-session');
+const { sessionData } = require('./session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const cookieParser = require('cookie-parser');
+const { hbsHelpers } = require('./helpers');
+
+// Provides minor additional security
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'"],
+            objectSrc: ["'none'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", 'data:', '*']
+        }
+    })
+);
 
 // Setup handlebars
 // Move this to its own file?
 const hbs = exphbs.create({
-    helpers: {
-        equals: (arg, arg2) => { return arg === arg2 },
-        noteq: (arg, arg2) => { return arg !== arg2 },
-        greater: (arg, arg2) => {return arg > arg2},
-        lesser: (arg, arg2) => {return arg < arg2},
-        p1: (arg) => {return arg + 1},
-        m1: (arg) => {return arg - 1},
-        for: (from, to, block) => {
-            let incr = '';
-            for(let i = from; i < to; i++)
-                incr += block.fn(i);
-            return incr; 
-        },
-        timeNowPassed: (cTime) => {
-            const utcNow = Date.now() + (new Date().getTimezoneOffset() * 60 * 1000); 
-            return utcNow >= cTime;
-        },
-        replaceIfWithin: (array, searchString, replacement) => {
-            if (array.includes(searchString)) {
-              return replacement;
-            } else {
-              return searchString;
-            }
-        },
-        truncateStringElipsis: (inputString, maxLength) => {
-            const realStr = String(inputString);
-            if(realStr.length > maxLength)
-                return String(inputString).substring(0, maxLength - 3) + '...';
-            else
-                return realStr;
-        },
-        removeHTML: (inputString) => {
-            return String(inputString).replace(/<\/?[^>]+(>|$)/g, '');
-        },
-        formatDate: (inputDate) => {
-            return helpers.formatDate(inputDate);
-        },
-        lenEq: (array, comparitor) => {
-            return array.length === parseInt(comparitor);
-        },
-        lenNotEq: (array, comparitor) => {
-            return array.length !== parseInt(comparitor, 10);
-        },
-        optionSelected: (v1, v2) => {
-            return v1 === v2 ? 'selected' : '';
-        }
-    },
+    helpers: hbsHelpers,
     defaultLayout: 'main',
     extname: '.handlebars',
     
@@ -65,7 +39,7 @@ const hbs = exphbs.create({
 });
 
 // Setup assets
-app.use(express.static('content'));
+app.use(express.static('static'));
 
 // Setup router
 routes(app);
@@ -74,10 +48,56 @@ routes(app);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// Body parsing
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 // Website startup
 const db = database.db;
+
+const sessionStore = new SequelizeStore({
+    db: db,
+    table: 'Session',
+});
+
+app.use(cookieParser(config.security.cookieSecret));
+
+app.use(session({
+    name: 'session',
+    secret: config.security.sigKey,
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: {
+        httpOnly: true,
+        secure: config.server.mode === 'prod',
+        sameSite: 'strict'
+    },
+}));
+
+app.use(sessionData);
+
+// CSRF setup
+app.use(csrfSynchronisedProtection);
+
 db.sync().then(() => {
-    app.listen(port, () => {
-        console.log(`Streaming site running @ localhost:${port}`);
+    app.use((req, res, next) => {
+        const notFoundError = new Error('Not Found');
+        notFoundError.status = 404;  
+        next(notFoundError);
+    });
+
+    // TODO: Make a real error page
+    app.use((err, req, res, next) => {
+        res.status(err.status || 500);
+        res.json({
+            error: {
+                details: [{message: err.message || 'Internal Server Error'}]
+            }
+        });
+    });
+
+    app.listen(config.server.port, () => {
+        console.log(`Streaming site running @ localhost:${config.server.port}`);
     });
 });

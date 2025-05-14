@@ -37,6 +37,7 @@ const User = sequelize.define('User', {
     },
     streamKey: {
         type: Sequelize.TEXT,
+        unique: true,
         allowNull: false
     },
     power: {

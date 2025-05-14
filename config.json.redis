@@ -1,6 +1,12 @@
 {
     "server": {
-        "port": 3789
+        "port": 3789,
+        "mode": 0
+    },
+
+    "security": {
+        "cookieSecret": "",
+        "sigKey": "",
     },
 
     "database": {

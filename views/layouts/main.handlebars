@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>{{title}}</title>
+    <!-- Common scripts -->
+    <script src="/js/get-token.js"></script>
+    <script src="/js/fetch-endpoint.js"></script>
+</head>
+<body>
+    <div id="Header">
+        <h2>Streaming Site</h2>
+        <div id="HeaderBody">
+            <a href="/">Home</a>
+            <a href="/streams">Streams</a>
+            <a href="/users">Users</a>
+            <div id="RightOfHeader">
+                {{#if loggedIn}}
+                    <a href="/users/{{userId}}">{{username}}</a>
+                    <a href="/settings">Settings</a>
+                    <a href="#" id="Header_LogoutLink">Logout</a>
+                {{else}}
+                    <a href="/login">Login</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{#if loggedIn}}
+    <script src="/js/perpage/logout.js"></script>
+    {{/if}}    
+    <div id="Page" class="container">
+        {{{body}}}
+    </div>
+    <div id="Footer"></div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!-- I hate inline css, but I see no other good way -->
+<div class="ContentCollection" style="justify-content: center;">
+    <div class="ContentBox_sm" style="max-width: 400px;">
+        <h3 class="ContentBoxHeader">Register</h3>
+        <div class="ContentBoxBody">
+            {{> formErrors}}
+            <label for="Register_Username">Username</label>
+            <input type="text" name="Register_Username" id="Form_Register_Username">
+
+            <label for="Register_Password">Password</label>
+            <input type="password" name="Register_Password" id="Form_Register_Password">
+
+            <label for="Register_Password_Confirm">Confirm Password</label>
+            <input type="password" name="Register_Password_Confirm" id="Form_Register_Password_Confirm">
+
+            <div class="TextCenter">
+                <button class="Button_sm" id="Form_Register_Button">Register</button>
+                <hr>
+                <p class="Muted">Already a member? Login <a href="/login">here</a>!</p>
+            </div>
+        </div>
+    </div>     
+</div>
+
+<script src="/js/perpage/register.js"></script>
