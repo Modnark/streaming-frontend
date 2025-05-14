@@ -20,7 +20,9 @@ app.use(
             scriptSrc: ["'self'"],
             objectSrc: ["'none'"],
             styleSrc: ["'self'", "'unsafe-inline'"],
-            imgSrc: ["'self'", 'data:', '*']
+            imgSrc: ["'self'", 'data:', '*'],
+            mediaSrc: ["'self'", 'data:', '*'],
+            connectSrc: ["'self'", 'data:', '*']
         }
     })
 );
