@@ -51,9 +51,9 @@ async function getStreamUrl() {
 }
 
 // Check if the stream is live
-async function isLive(streamUrl) {
+async function isLive() {
     try {
-        const res = await fetch(streamUrl);
+        const res = await fetch(`https://stream.modnark.xyz/api/v1/user/is-live/${channelId}`);
         return res.ok;
     } catch(error) {
         console.error(`Error in isLive() ${error}`);

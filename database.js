@@ -45,6 +45,18 @@ const User = sequelize.define('User', {
         unique: true,
         allowNull: false        
     },
+    streamTitle: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    streamDescription: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    lastLivePing: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     power: {
         type: Sequelize.SMALLINT,
         allowNull: false,
