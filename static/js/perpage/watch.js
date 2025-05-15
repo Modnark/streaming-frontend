@@ -9,7 +9,7 @@ const liveIndicatorIcon = document.getElementById('WatchPage_LiveStatus');
 const retryTimeout = 5; // seconds
 const maxRetriesAfterStreamConnect = 10;
 const channelId = watchPageVideo.dataset.channelid;
-let streamPlaying = true;
+let streamPlaying = false;
 let hls = undefined;
 let retryCount = 0;
 
