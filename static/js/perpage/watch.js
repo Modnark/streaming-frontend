@@ -101,6 +101,8 @@ function endLiveStream() {
     watchPageVideo.style.backgroundPosition = 'center';
     watchPageVideo.style.backgroundRepeat = 'no-repeat';
     watchPageVideo.style.backgroundColor = '#000000';
+    watchPageVideo.removeAttribute('src');
+    watchPageVideo.load();
     watchPageVideo.pause();
     streamPlaying = false;
     
