@@ -25,7 +25,7 @@ router.get(apiPath, async (req, res, next) => {
 
         if(userRes) {
             const publicStreamKey = userRes.publicStreamKey;
-            const filePath = path.join(config.server.streamStorage, `${publicStreamKey}.m3u8`);
+            const filePath = path.join(config.server.streamStorage, `${publicStreamKey}_dat.m3u8`);
             const mTime = (await fs.stat(filePath)).mtimeMs;
             const delta = Date.now() - mTime;
             
