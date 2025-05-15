@@ -78,7 +78,7 @@ async function keepAlive() {
     const isStreamLive = await isLive(streamUrl);
 
     if(isStreamLive) {
-        if(!isVideoPlaying) {
+        if(!streamPlaying) {
             streamPlaying = true;
             initPlayer();
         }
@@ -93,10 +93,6 @@ async function keepAlive() {
 // Start playing the video (if live else retry)
 async function initPlayer() {
     await loadVideo();
-}
-
-function pauseUntilReconnected() {
-    
 }
 
 // This will be called if the stream stops
