@@ -11,7 +11,6 @@ const maxRetriesAfterStreamConnect = 10;
 const channelId = watchPageVideo.dataset.channelid;
 let streamPlaying = false;
 let hls = undefined;
-let retryCount = 0;
 
 function updateIndicator(isLive) {
     liveIndicatorText.style.color = isLive ? red : '#000000';
@@ -53,8 +52,11 @@ async function getStreamUrl() {
 // Check if the stream is live
 async function isLive() {
     try {
-        const res = await fetch(`https://stream.modnark.xyz/api/v1/user/is-live/${channelId}`);
-        return res.ok;
+        const res = await fetch(`https://stream.modnark.xyz/api/user/v1/get-live-status/${channelId}`);
+        const jsonRes = await res.json();
+        if(res.ok)
+            return jsonRes.live;
+        return false;
     } catch(error) {
         console.error(`Error in isLive() ${error}`);
     }
@@ -74,24 +76,21 @@ async function loadVideo() {
 
 // Keeps the stream going
 async function keepAlive() {
-    const streamUrl = await getStreamUrl();
-    const isStreamLive = await isLive(streamUrl);
-
-    if(isStreamLive) {
+    if(await isLive()) {
         if(!streamPlaying) {
-            streamPlaying = true;
-            initPlayer();
+            await initPlayer();
         }
-        return;
-    }
-
-    if(streamPlaying) {
-        endLiveStream();
+    } else {
+        if(streamPlaying) {
+            endLiveStream();
+        }
     }
 }
 
 // Start playing the video (if live else retry)
 async function initPlayer() {
+    streamPlaying = true;  
+    updateIndicator(true);  
     await loadVideo();
 }
 
