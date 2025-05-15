@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database');
 const db = database.db;
-const { quickError, getStreamFileName } = require('../helpers');
+const { quickError } = require('../helpers');
 const path = '/watch/:channelId';
 
 // Frontend
@@ -24,7 +24,7 @@ router.get(path, async (req, res, next) => {
                 'watch', 
                 {
                     title: `Watching ${userRes.username}'s Stream`, 
-                    publicKey: getStreamFileName(userRes.username, userRes.userId)
+                    channelId: req.params.channelId
                 }
             );
         }

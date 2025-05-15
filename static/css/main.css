@@ -184,3 +184,17 @@ button:active {
 .No_Margin_Bottom {
     margin-bottom: 0;
 }
+
+/* Watch Page */
+#WatchPage_LiveStatus {
+    border-radius: 100px;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+}
+
+#WatchPage_LiveStatusText {
+    font-weight: bold;
+    display: inline-block;
+}

@@ -29,7 +29,8 @@ router.post(apiPath, auth.noAuth, async(req, res, next) => {
             const user = await database.models.User.create({
                 username: req.body.username,
                 password: hashedPassword,
-                streamKey: randomString()
+                streamKey: randomString(),
+                publicStreamKey: randomString()
             });
             return user;
         });

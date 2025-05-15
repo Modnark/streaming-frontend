@@ -1,4 +1,8 @@
-<video data-publickey="{{publicKey}}" width="100%" id="WatchPage_VideoPlayer" controls autoplay></video>
+<div>
+    <div id="WatchPage_LiveStatus" style="display: none;"></div>
+    <div id="WatchPage_LiveStatusText">Offline</div>
+</div>
+<video data-channelid="{{channelId}}" width="100%" id="WatchPage_VideoPlayer" controls autoplay></video>
 
 <script src="/js/hls.min.js"></script>
 <script src="/js/perpage/watch.js"></script>
