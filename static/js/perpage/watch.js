@@ -14,7 +14,7 @@ let hls = undefined;
 
 function updateIndicator(isLive) {
     console.log(`Indicator update: ${isLive}`);
-    liveIndicatorText.style.color = isLive ? red : '#000000';
+    liveIndicatorText.style.color = isLive ? 'red' : '#000000';
     liveIndicatorText.innerText = isLive ? 'LIVE' : 'Offline';
     liveIndicatorIcon.style.display = isLive ? 'inline-block' : 'none';
 }
