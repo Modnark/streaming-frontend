@@ -12,7 +12,8 @@ const apiPath = '/api/auth/v1/register';
 
 // Frontend
 router.get('/register', auth.noAuth, async (req, res) => {
-    res.render('register', {title: 'Register'});
+    res.send('no');
+    //res.render('register', {title: 'Register'});
 });
 
 // API

@@ -70,7 +70,8 @@ async function loadVideo() {
     if(Hls.isSupported()) {
         hls = new Hls({
             maxBufferLength: 10,
-            enableWorker: false
+            enableWorker: false,
+            liveDurationInfinity: true
         });
         hls.loadSource(await getStreamUrl());
         hls.attachMedia(watchPageVideo);
