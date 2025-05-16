@@ -68,7 +68,10 @@ async function isLive() {
 // TODO: only play after play button is clicked, stop doing stuff when stopped
 async function loadVideo() {
     if(Hls.isSupported()) {
-        hls = new Hls();
+        hls = new Hls({
+            maxBufferLength: 10,
+            enableWorker: false
+        });
         hls.loadSource(await getStreamUrl());
         hls.attachMedia(watchPageVideo);
         hls.on(Hls.Events.MANIFEST_PARSED, () => watchPageVideo.play());
